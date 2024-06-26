@@ -15,7 +15,5 @@ input[type=range]::-webkit-slider-runnable-track {
     width: 15px;
     height: 15px;
     margin-top: -6px;
-    color: red;
-    background: #8d1111;
     border-radius: 50%;
   }	
