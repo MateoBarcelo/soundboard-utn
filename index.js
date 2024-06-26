@@ -3,11 +3,14 @@ import { sounds } from "./dummy/sounds.js";
 class Soundboard {
   constructor() {
     this.sounds =
-      localStorage.getItem("sounds") == []
+      localStorage.getItem("sounds") != "[]"
         ? [...JSON.parse(localStorage.getItem("sounds"))]
         : [...sounds];
     this.soundboardEl = document.querySelector(".soundboard");
     this.addSoundButton = document.querySelector(".add-sound");
+    this.volumeSlider = document.querySelector(".volumeslider");
+    this.volume = localStorage.getItem("volume") || 0.5;
+    this.volumeSlider.value = this.volume;
 
     this.initialize();
   }
@@ -15,6 +18,9 @@ class Soundboard {
   initialize() {
     this.renderSounds();
     this.addSoundButton.addEventListener("click", () => this.addSound());
+    this.volumeSlider.addEventListener("input", () => {
+      localStorage.setItem("volume", this.volumeSlider.value);
+    });
   }
 
   renderSounds() {
@@ -106,7 +112,10 @@ class Soundboard {
   }
 
   playSound(url) {
+    const volume = document.querySelector(".volumeslider").value;
+
     const audio = new Audio(url);
+    audio.volume = volume;
     audio.play();
   }
 
