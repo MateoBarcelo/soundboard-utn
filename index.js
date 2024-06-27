@@ -9,6 +9,7 @@ class Soundboard {
       : [...sounds];
     this.soundboardEl = document.querySelector(".soundboard");
     this.addSoundButton = document.querySelector(".add-sound");
+    this.addSoundSecondaryButton = document.querySelector(".add-sound-button");
     this.volumeSlider = document.querySelector(".volumeslider");
     this.volume = localStorage.getItem("volume") || 0.5;
     this.volumeSlider.value = this.volume;
@@ -19,6 +20,7 @@ class Soundboard {
   initialize() {
     this.renderSounds();
     this.addSoundButton.addEventListener("click", () => this.addSound());
+    this.addSoundSecondaryButton.addEventListener("click", () => this.addSound());
     this.volumeSlider.addEventListener("input", () => {
       localStorage.setItem("volume", this.volumeSlider.value);
     });
