@@ -2,10 +2,11 @@ import { sounds } from "./dummy/sounds.js";
 
 class Soundboard {
   constructor() {
-    this.sounds =
-      localStorage.getItem("sounds") != "[]"
-        ? [...JSON.parse(localStorage.getItem("sounds"))]
-        : [...sounds];
+    const localSounds = localStorage.getItem("sounds") ? localStorage.getItem("sounds") !== "[]" : false;
+
+    this.sounds = localSounds
+      ? [...JSON.parse(localStorage.getItem("sounds"))]
+      : [...sounds];
     this.soundboardEl = document.querySelector(".soundboard");
     this.addSoundButton = document.querySelector(".add-sound");
     this.volumeSlider = document.querySelector(".volumeslider");
